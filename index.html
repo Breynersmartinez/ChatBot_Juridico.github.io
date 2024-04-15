@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Prometea IA</title>
+   <!--<link rel="stylesheet" href="style.css"> --> 
+  
+    <link rel="stylesheet" href="style.css">
+  
+    <link rel="icon" href="Imagenes/MUJER_Robot_Balanzas_png.png" type="image/x-icon"> <!-- Aparece el icono o la imagen en la pestaña del navegador -->
+</head>
+<body>
+    <!--Menu-->
+    <div class="dropdown">
+        <div class="dropdown-btn" onclick="toggleDropdown()">☰</div>
+        <div class="dropdown-content" id="dropdownContent">
+          <!-- <type="icon" class="iconos">
+            <img src="Imagenes/ajsutes_azl.png   " alt=" Google Icon ">  --> 
+          <a href="#">⚙️Ajustes </a>
+          <a href="#">📝 Crear Nueva Conversación</a>
+          <a href="#">🕒 Historial de Conversaciones</a>
+          <a href="#">👤 Perfil</a>
+          <a href="#">🔒 Cerrar Sesión</a>
+       
+            <label for="themeSwitch">Tema:</label>
+            <label class="theme-switch">
+                <input type="checkbox" id="themeSwitch" onchange="toggleTheme()">
+                <span class="slider round"></span>
+                <span class="sun-icon">🌤️</span>
+                <span class="moon-icon">🌙</span>
+            </label> 
+        </div> 
+        </div>
+    
+    <!--Letraas con imagen de fondo aplicada-->
+    <div class="Texto">
+        <h1 class="Texto">Prometea IA 🤖</h1>
+    </div>
+<!--recuadro que contiene los chats 
+-->
+    <div class="chat-container">
+        <div class="chat-window" id="chatWindow">
+
+            <!-- lim-->
+            <div class="message bot-message">
+            <div class="icon-container">
+                <img src="Imagenes/chatboot.png"  alt="Icono" class="icon">
+            </div>
+            <div  class="message bot-message">Hola, soy Prometea tu asistente jurídico. ¿En qué puedo asesorarte jurídicamente?</div>
+        </div>
+            <!--lim-->
+
+            <div class="message bot-message">
+                <!--Icono al lado de las borbujas de chat-->
+                <div class="icon-container">
+                    <img src="Imagenes/chatboot.png"  alt="Icono" class="icon">
+                </div>
+                Como inteligencia Artificial puedo asesorarte con casos no complejos, en el documento te dejo los casos en los que puedo ayudarte: 
+                <button onclick="openDocument()">Abrir Documento </button>
+            </div>
+        </div> 
+    </div> <!-- Cierre de chat-container -->
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Escribe tu consulta jurídica...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+    
+    <!-- <button class="button" onclick="pauseBot()">Pausar</button>  Aplica la clase "pause-button" para el botón "Pausar" -->
+    <!--<button class="button" onclick="resumeBot()">Reanudar</button> <!-- Aplica la clase "button" para el botón "Reanudar" -->
+ 
+    <!--CONEXION ENTRE .HTML PARA PASAR DE UNA PAGINA A OTRA-->
+   <!--<a href="index.html">Siguiente</a>--> 
+
+<!-- entrenamiiento python-->
+
+
+
+<script src="funcionalidad_pag.js"></script>
+
+
+
+
+
+
+
+    
+<video id="video" width="640" height="480" autoplay></video>
+    <button id="capture">Capturar Imagen</button>
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+
+        // Accede a la cámara del dispositivo
+        async function openCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error al acceder a la cámara:', error);
+            }
+        }
+
+        // Captura una imagen del video en el canvas
+        function captureImage() {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Aquí puedes enviar la imagen al servidor para procesamiento de OCR
+            // Por ejemplo, utilizando Tesseract.js
+        }
+
+        // Evento al hacer clic en el botón de captura
+        captureButton.addEventListener('click', () => {
+            captureImage();
+        });
+
+        // Abre la cámara cuando la página se carga
+        window.addEventListener('DOMContentLoaded', () => {
+            openCamera();
+        });
+    </script>
+</body>
+</html>
